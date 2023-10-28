@@ -60,13 +60,5 @@
         "memory": 2048
       }
     }
-  },
-  "availability-zones:account=653447407251:region=ap-northeast-1": [
-    "ap-northeast-1a",
-    "ap-northeast-1c",
-    "ap-northeast-1d"
-  ],
-  "key-provider:account=653447407251:aliasName=alias/aws/rds:region=ap-northeast-1": {
-    "keyId": "099151b6-e0ba-4a64-ab69-a4c51b904333"
   }
 }
