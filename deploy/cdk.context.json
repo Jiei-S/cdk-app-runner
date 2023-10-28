@@ -1,0 +1,72 @@
+{
+  "dev": {
+    "network": {
+      "vpc": {
+        "cidr": "10.0.0.0/16",
+        "maxAzs": 2,
+        "subnetConfiguration": [
+          {
+            "cidrMask": 20,
+            "name": "private",
+            "subnetType": "private"
+          },
+          {
+            "cidrMask": 20,
+            "name": "public",
+            "subnetType": "public"
+          }
+        ],
+        "natGatewaysCount": 1
+      }
+    },
+    "db": {
+      "cluster": {
+        "preferredMaintenanceWindow": "sat:18:30-sat:19:00",
+        "backtrackWindow": 3600,
+        "instance": {
+          "writer": {
+            "instanceSize": "medium",
+            "instanceClass": "t3"
+          },
+          "reader": {
+            "instanceSize": "medium",
+            "instanceClass": "t3"
+          }
+        },
+        "backup": {
+          "retention": 1,
+          "preferredWindow": "17:30-18:00"
+        },
+        "scalableTarget": {
+          "maxCapacity": 4,
+          "minCapacity": 2,
+          "targetValue": 70,
+          "scaleInCooldown": 300,
+          "scaleOutCooldown": 1800
+        }
+      }
+    },
+    "api": {
+      "appRunner": {
+        "healthCheck": {
+          "path": "/",
+          "interval": 15,
+          "timeout": 10,
+          "healthyThreshold": 1,
+          "unhealthyThreshold": 5,
+          "protocol": "HTTP"
+        },
+        "cpu": 1024,
+        "memory": 2048
+      }
+    }
+  },
+  "availability-zones:account=653447407251:region=ap-northeast-1": [
+    "ap-northeast-1a",
+    "ap-northeast-1c",
+    "ap-northeast-1d"
+  ],
+  "key-provider:account=653447407251:aliasName=alias/aws/rds:region=ap-northeast-1": {
+    "keyId": "099151b6-e0ba-4a64-ab69-a4c51b904333"
+  }
+}
