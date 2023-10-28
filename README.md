@@ -1,7 +1,8 @@
-# App Runner
+# App Runner 
 
 This is a sample project for deploying App Runner service with AWS CDK.
 
+![Architecture](./architecture.drawio.png)
 
 ## How To Deploy
 
@@ -13,14 +14,6 @@ This is a sample project for deploying App Runner service with AWS CDK.
    ```
 
 2. Create a new secret paramater store in AWS Systems Manager.  
-
-   - `/db/host`
-   - `/db/read-host`
-   - `/db/port`
-   - `/db/username`
-   - `/db/password`
-   - `/db/dbname`
-   - `/db/tz`
 
 3. Add new environment variables to the `cdk.context.json` file.
 

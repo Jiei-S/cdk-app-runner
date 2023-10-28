@@ -2,9 +2,10 @@
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { APIProps, APIStack } from "../lib/api-stack";
-
 import { NetworkProps, NetworkStack } from "../lib/network-stack";
 import { DBProps, DBStack } from "../lib/db-stack";
+import { DBBastionStack } from "../lib/db-bastion-stack";
+import { FrontStack } from "../lib/front-stack";
 
 type EnvProps = {
   readonly api: APIProps;
@@ -41,6 +42,15 @@ const db = new DBStack(app, "db-stack", {
 });
 db.addDependency(network);
 
+const bastion = new DBBastionStack(app, "db-bastion-stack", {
+  vpc: network.vpc,
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  },
+});
+bastion.addDependency(db);
+
 const api = new APIStack(app, "api-stack", {
   envType,
   commitHash,
@@ -52,3 +62,10 @@ const api = new APIStack(app, "api-stack", {
 });
 api.addDependency(network);
 api.addDependency(db);
+
+new FrontStack(app, "front-stack", {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  },
+}).addDependency(api);
