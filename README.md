@@ -23,5 +23,3 @@ This is a sample project for deploying App Runner service with AWS CDK.
    $ cdk diff "*" -c env=<ENV> -c commit=<COMMIT_HASH>
    $ cdk deploy "*" -c env=<ENV> -c commit=<COMMIT_HASH> --require-approval never
    ```
-
-After deploying, you can access the App Runner service from the default domain name.
